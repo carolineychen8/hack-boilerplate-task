@@ -4,7 +4,11 @@
  * desired function.
  */
 import express from 'express';
-import { postPerson, getAll } from '../controllers/toxicperson.controller';
+import {
+  postPerson,
+  getAll,
+  addToxicTrait,
+} from '../controllers/toxicperson.controller';
 import 'dotenv/config';
 
 const router = express.Router();
@@ -15,8 +19,13 @@ const router = express.Router();
 router.post('/', postPerson);
 
 /**
- * Gets all people  from the database.
+ * Gets all people from the database.
  */
 router.get('/', getAll);
+
+/**
+ * Add a toxic trait for a specific person
+ */
+router.put('/:id', addToxicTrait);
 
 export default router;

@@ -17,6 +17,21 @@ const findPersonByName = async (firstName: string, lastName: string) => {
 };
 
 /**
+ * Updates toxic traits list
+ */
+const updateById = async (id: string, trait: string) => {
+  const user = await ToxicPerson.findById(id).exec();
+  if (user != null) {
+    user.toxicTraits.push(trait);
+    const result = await ToxicPerson.findByIdAndUpdate(id, {
+      toxicTraits: user.toxicTraits,
+    });
+    return result;
+  }
+  return null;
+};
+
+/**
  * Creates a new person in the database.
  */
 const createPerson = async (
@@ -43,4 +58,4 @@ const getAllPeopleFromDB = async () => {
   return userList;
 };
 
-export { findPersonByName, createPerson, getAllPeopleFromDB };
+export { findPersonByName, createPerson, getAllPeopleFromDB, updateById };

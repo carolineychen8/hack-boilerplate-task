@@ -11,6 +11,7 @@ import {
   // findPersonByName,
   createPerson,
   getAllPeopleFromDB,
+  updateById,
 } from '../services/toxicperson.service';
 
 /**
@@ -61,4 +62,25 @@ const getAll = async (
   );
 };
 
-export { postPerson, getAll };
+/**
+ * Create toxic traits for a specific person
+ */
+const addToxicTrait = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
+  const { id } = req.params;
+  const { trait } = req.body;
+
+  updateById(id, trait)
+    .then(() => {
+      res.sendStatus(StatusCode.OK);
+    })
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    .catch((e) => {
+      next(ApiError.internal('Unexpected error occurred.'));
+    });
+};
+
+export { postPerson, getAll, addToxicTrait };
