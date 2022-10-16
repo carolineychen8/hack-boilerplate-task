@@ -8,6 +8,7 @@ import {
   postPerson,
   getAll,
   addToxicTrait,
+  getTraits,
 } from '../controllers/toxicperson.controller';
 import 'dotenv/config';
 
@@ -22,6 +23,11 @@ router.post('/', postPerson);
  * Gets all people from the database.
  */
 router.get('/', getAll);
+
+/**
+ * Gets all traits for a person
+ */
+router.get('/:id', getTraits);
 
 /**
  * Add a toxic trait for a specific person

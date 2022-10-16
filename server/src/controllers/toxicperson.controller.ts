@@ -12,6 +12,7 @@ import {
   createPerson,
   getAllPeopleFromDB,
   updateById,
+  getAllTraits,
 } from '../services/toxicperson.service';
 
 /**
@@ -83,4 +84,24 @@ const addToxicTrait = async (
     });
 };
 
-export { postPerson, getAll, addToxicTrait };
+/**
+ * Get all traits for a specific person
+ */
+const getTraits = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
+  const { id } = req.params;
+
+  getAllTraits(id)
+    .then((traitList) => {
+      res.status(StatusCode.OK).send(traitList);
+    })
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    .catch((e) => {
+      next(ApiError.internal('Unexpected error occurred.'));
+    });
+};
+
+export { postPerson, getAll, addToxicTrait, getTraits };
