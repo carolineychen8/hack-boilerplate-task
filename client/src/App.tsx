@@ -20,6 +20,8 @@ import RegisterPage from './Authentication/RegisterPage';
 import LoginPage from './Authentication/LoginPage';
 import EmailResetPasswordPage from './Authentication/EmailResetPasswordPage';
 import ResetPasswordPage from './Authentication/ResetPasswordPage';
+import ToxicPeoplePage from './ToxicPeople/ToxicPeoplePage';
+import ToxicDetailPage from './ToxicPeople/ToxicDetailPage';
 
 function App() {
   return (
@@ -50,6 +52,7 @@ function App() {
                   {/* Routes accessed only if user is authenticated */}
                   <Route element={<ProtectedRoutesWrapper />}>
                     <Route path="/home" element={<HomePage />} />
+                    <Route path="/toxic" element={<ToxicPeoplePage />} />
                   </Route>
                   <Route element={<AdminRoutesWrapper />}>
                     <Route path="/users" element={<AdminDashboardPage />} />
