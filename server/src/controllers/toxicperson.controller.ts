@@ -8,11 +8,11 @@ import ApiError from '../util/apiError';
 import StatusCode from '../util/statusCode';
 // import { IToxicPerson, ToxicPerson } from '../models/toxicperson.model';
 import {
-  // findPersonByName,
   createPerson,
   getAllPeopleFromDB,
   updateById,
   getAllTraits,
+  findPersonByName,
 } from '../services/toxicperson.service';
 
 /**
@@ -30,6 +30,12 @@ const postPerson = async (
 
   if (!firstName) {
     next(ApiError.missingFields(['firstName']));
+    return;
+  }
+
+  const duplicate = await findPersonByName(firstName, lastName);
+  if (duplicate.length > 0) {
+    next(ApiError.badRequest('Person Already Exists'));
     return;
   }
 
