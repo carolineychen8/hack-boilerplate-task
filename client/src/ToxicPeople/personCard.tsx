@@ -19,7 +19,7 @@ function createCard({ firstName, lastName, pictureUrl }: personCardPage) {
       <CardMedia component="img" height="140" image={pictureUrl} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {firstName} + ` ` + {lastName}
+          {firstName} {lastName}
         </Typography>
       </CardContent>
     </Card>
