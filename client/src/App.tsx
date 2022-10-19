@@ -48,11 +48,6 @@ function App() {
                       path="/reset-password/:token"
                       element={<ResetPasswordPage />}
                     />
-                    <Route path="/toxicpeople" element={<ToxicPeoplePage />} />
-                    <Route
-                      path="/toxicpeople/:id"
-                      element={<ToxicDetailPage />}
-                    />
                   </Route>
                   {/* Routes accessed only if user is authenticated */}
                   <Route element={<ProtectedRoutesWrapper />}>
@@ -61,6 +56,13 @@ function App() {
                   <Route element={<AdminRoutesWrapper />}>
                     <Route path="/users" element={<AdminDashboardPage />} />
                   </Route>
+
+                  {/* These routes can be accessed regardless of authentication */}
+                  <Route path="/toxicpeople" element={<ToxicPeoplePage />} />
+                  <Route
+                    path="/toxicpeople/:id"
+                    element={<ToxicDetailPage />}
+                  />
 
                   {/* Route which redirects to a different page depending on if the user is an authenticated or not by utilizing the DynamicRedirect component */}
                   <Route

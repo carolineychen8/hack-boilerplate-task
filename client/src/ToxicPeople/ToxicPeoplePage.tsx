@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Grid } from '@mui/material';
+import { Box, Container, Typography, TextField } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import { useNavigate } from 'react-router-dom';
 import ScreenGrid from '../components/ScreenGrid';
 import IToxicPerson from '../util/types/toxicperson';
@@ -19,27 +20,48 @@ function ToxicPeoplePage() {
   console.log(people?.data);
   const list = people?.data;
 
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
   const navigate = useNavigate();
 
   return (
-    <ScreenGrid>
-      <Grid container spacing={2} item direction="row" justifyContent="center">
-        <Typography variant="h2">Welcome to Hack4Impact!</Typography>
-        {list?.map((person: any) => (
-          <Grid xs={4} sx={{ display: 'flex', justifyContent: 'center' }}>
-            <ToxicCard person={person} navigate={navigate} />
-          </Grid>
-        ))}
-
-        {/* {list?.map((person: IToxicPerson) =>
-          createCard({
-            firstName: person.firstName,
-            lastName: person.lastName,
-            pictureUrl: person.pictureUrl,
-          }),
-        )} */}
+    <Box sx={{ paddingLeft: 20, paddingRight: 20, paddingTop: 5 }}>
+      <Container sx={{ textAlign: 'center', marginBottom: 10 }}>
+        <Typography variant="h2">Toxic Traits</Typography>
+        <TextField
+          id="outlined-basic"
+          label="Search for people"
+          variant="outlined"
+          value={searchQuery}
+          sx={{ height: 30 }}
+          fullWidth
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+          }}
+        />
+      </Container>
+      <Grid container spacing={2}>
+        {people?.data
+          .filter((person: IToxicPerson) =>
+            searchQuery
+              ? person.firstName
+                  .toLocaleLowerCase()
+                  .includes(searchQuery.toLocaleLowerCase()) ||
+                person.lastName
+                  .toLocaleLowerCase()
+                  .includes(searchQuery.toLocaleLowerCase())
+              : true,
+          )
+          .map((person: IToxicPerson) => {
+            console.log(person);
+            return (
+              <Grid xs={4} sx={{ display: 'flex', justifyContent: 'center' }}>
+                <ToxicCard person={person} navigate={navigate} />
+              </Grid>
+            );
+          })}
       </Grid>
-    </ScreenGrid>
+    </Box>
   );
 }
 

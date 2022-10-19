@@ -25,9 +25,11 @@ const HoverCard = styled(Card)`
 export default function ToxicCard({ person, navigate }: ToxicCardProps) {
   const { firstName, lastName, pictureUrl, toxicTraits, _id } = person;
 
+  console.log(firstName);
+
   return (
     <HoverCard sx={{ maxWidth: 345 }}>
-      <CardActionArea onClick={() => navigate(`/toxic/${_id}`)}>
+      <CardActionArea onClick={() => navigate(`/toxicpeople/${_id}`)}>
         <CardMedia
           component="img"
           height="140"
@@ -38,9 +40,6 @@ export default function ToxicCard({ person, navigate }: ToxicCardProps) {
           <Typography gutterBottom variant="h5" component="div">
             {firstName} {lastName}
           </Typography>
-          {/* <Typography variant="body2" color="text.secondary">
-            {toxicTraits}
-          </Typography> */}
         </CardContent>
       </CardActionArea>
     </HoverCard>
