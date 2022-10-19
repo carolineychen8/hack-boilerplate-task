@@ -22,7 +22,7 @@ router.post('/', postPerson);
 /**
  * Gets all people from the database.
  */
-router.get('/', getAll);
+router.get('/all', getAll);
 
 /**
  * Gets all traits for a person

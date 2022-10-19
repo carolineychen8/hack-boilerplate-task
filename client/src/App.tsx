@@ -53,6 +53,7 @@ function App() {
                   <Route element={<ProtectedRoutesWrapper />}>
                     <Route path="/home" element={<HomePage />} />
                     <Route path="/toxic" element={<ToxicPeoplePage />} />
+                    <Route path="/toxic/:id" element={<ToxicDetailPage />} />
                   </Route>
                   <Route element={<AdminRoutesWrapper />}>
                     <Route path="/users" element={<AdminDashboardPage />} />
